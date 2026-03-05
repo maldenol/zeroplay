@@ -13,7 +13,7 @@ have a nice day ;)
 ## Supported Formats
 | Codec | Container |
 |---|---|
-| H.264 | MP4, MKV, MOV |
+| H.264 (up to High@L4.1) | MP4, MKV, MOV |
 | H.265 / HEVC | MP4, MKV |
 | VP8 | MKV, WebM |
 | VP9 | MKV, WebM |
@@ -23,29 +23,26 @@ H.264 and H.265 are hardware decoded via the bcm2835 VPU. VP8, VP9, and MPEG-4 h
 
 ## Installation
 
-### Dependencies
+```
+curl -fsSL https://raw.githubusercontent.com/HorseyofCoursey/zeroplay/main/install.sh | sudo bash
+```
+
+This will install dependencies, build from source, and place the binary at `/usr/local/bin/zeroplay`.
+
+### Manual build
+
+If you'd prefer to build yourself:
 
 ```
 sudo apt install git gcc make \
   libavformat-dev libavcodec-dev libavutil-dev libswresample-dev \
   libdrm-dev libasound2-dev
-```
 
-### Build
-
-```
 git clone https://github.com/HorseyofCoursey/zeroplay.git
 cd zeroplay
 make
-```
-
-### Install system-wide (optional)
-
-```
 sudo make install
 ```
-
-This installs the `zeroplay` binary to `/usr/local/bin`.
 
 ## Usage
 
