@@ -14,12 +14,10 @@ have a nice day ;)
 | Codec | Container |
 |---|---|
 | H.264 (up to High@L4.1) | MP4, MKV, MOV |
-| H.265 / HEVC | MP4, MKV |
 | VP8 | MKV, WebM |
 | VP9 | MKV, WebM |
-| MPEG-4 | AVI, MP4 |
 
-H.264 and H.265 are hardware decoded via the bcm2835 VPU. VP8, VP9, and MPEG-4 hardware support depends on firmware version — if unsupported, ZeroPlay will report a clear error.
+H.264 is hardware decoded via the bcm2835 VPU. VP8 and VP9 hardware support depends on firmware version — if unsupported, ZeroPlay will report a clear error.
 
 ## Installation
 

@@ -302,18 +302,15 @@ int vdec_open(VdecContext *ctx, AVStream *stream,
                 stream->codecpar->extradata[0] != 0x00)
                 bsf_name = "h264_mp4toannexb";
             break;
-        case AV_CODEC_ID_HEVC:
-            v4l2_fmt = V4L2_PIX_FMT_HEVC;
-            if (stream->codecpar->extradata_size > 0 &&
-                stream->codecpar->extradata[0] != 0x00)
-                bsf_name = "hevc_mp4toannexb";
-            break;
         case AV_CODEC_ID_VP8:
             v4l2_fmt = V4L2_PIX_FMT_VP8;
             break;
         case AV_CODEC_ID_VP9:
             v4l2_fmt = V4L2_PIX_FMT_VP9;
             break;
+        case AV_CODEC_ID_HEVC:
+            fprintf(stderr, "vdec: HEVC is not supported by the bcm2835 hardware decoder\n");
+            return -1;
         default:
             fprintf(stderr, "vdec: unsupported codec %s\n",
                     avcodec_get_name(codec_id));
