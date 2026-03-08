@@ -9,6 +9,7 @@ have a nice day ;)
 | Device | OS |
 |---|---|
 | Pi Zero 2 W | Raspberry Pi OS Lite 64-bit (Trixie) |
+| Pi 4 | Raspberry Pi OS Lite 64-bit (Trixie) |
 
 ## Supported Formats
 | Codec | Container |
