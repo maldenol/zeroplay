@@ -45,8 +45,10 @@ sudo make install
 ## Usage
 
 ```
-zeroplay [options] <file>
+zeroplay [options] <file> [file2 ...]
 ```
+
+Up to 4 files may be specified. Each file is assigned to a connected display in the order they are enumerated by DRM. On Pi 4 with two HDMI outputs connected, `zeroplay file1.mp4 file2.mp4` will play each file on a separate display simultaneously.
 
 ### Options
 | Flag | Description |
@@ -64,6 +66,9 @@ zeroplay [options] <file>
 ```
 # Play a file
 zeroplay movie.mp4
+
+# Dual display on Pi 4
+zeroplay file1.mp4 file2.mp4
 
 # Loop
 zeroplay --loop movie.mp4
@@ -98,7 +103,11 @@ zeroplay --verbose movie.mp4
 | `q` / `Esc` | Quit |
 
 ## Audio Device
-ZeroPlay defaults to HDMI audio. On Pi Zero 2W and Pi 3 the device is `plughw:CARD=vc4hdmi,DEV=0`. On Pi 4 with dual HDMI, use `plughw:CARD=vc4hdmi0,DEV=0` for HDMI0 or `plughw:CARD=vc4hdmi1,DEV=0` for HDMI1.
+ZeroPlay auto-detects the HDMI audio device. To override:
+
+```
+zeroplay --audio-device plughw:CARD=vc4hdmi0,DEV=0 movie.mp4
+```
 
 To list available devices:
 
@@ -106,11 +115,9 @@ To list available devices:
 aplay -L
 ```
 
-Then pass the device name with `--audio-device`.
-
 ## How It Works
 * **Demux** — libavformat reads the container and routes packets
-* **Video decode** — V4L2 M2M hardware decoder (`/dev/video10`) via bcm2835-codec
+* **Video decode** — V4L2 M2M hardware decoder via bcm2835-codec
 * **Display** — DRM/KMS atomic modesetting with DMABUF zero-copy from decoder to scanout
 * **Audio** — libavcodec software decode → libswresample → ALSA
 * **Sync** — Wall-clock pacing against video PTS, audio runs independently
@@ -122,6 +129,7 @@ No X11, no Wayland, no GPU compositing. Runs directly on the framebuffer from a 
 |---|---|---|
 | Hardware decode | OpenMAX (deprecated) | V4L2 M2M |
 | Display | dispmanx (deprecated) | DRM/KMS |
+| Dual display | No | Yes (Pi 4) |
 | Subtitles | Yes | No |
 | Chapter skip | No | Yes |
 | Seeking | Yes | Yes |
