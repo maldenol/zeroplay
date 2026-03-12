@@ -9,8 +9,11 @@ have a nice day ;)
 | Device | OS |
 |---|---|
 | Pi Zero 2 W | Raspberry Pi OS Lite 64-bit (Trixie) |
+| Pi 2 | Raspberry Pi OS Lite 32-bit (Trixie) |
 | Pi 3 / 3+ | Raspberry Pi OS Lite 64-bit (Trixie) |
 | Pi 4 | Raspberry Pi OS Lite 64-bit (Trixie) |
+
+Both 32-bit and 64-bit builds are supported. The install script builds from source automatically for the correct architecture.
 
 ## Supported Formats
 | Codec | Container |
