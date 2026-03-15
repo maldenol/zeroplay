@@ -11,7 +11,6 @@ have a nice day ;)
 | Pi Zero W (original) | Raspberry Pi OS Lite 32-bit (Trixie) |
 | Pi Zero 2 W | Raspberry Pi OS Lite 64-bit (Trixie) |
 | Pi Zero 2 W | Raspberry Pi OS Lite 32-bit (Trixie) |
-| Pi 1B (512MB) | Raspberry Pi OS Lite 32-bit (Trixie) |
 | Pi 3 / 3+ | Raspberry Pi OS Lite 64-bit (Trixie) |
 | Pi 3 / 3+ | Raspberry Pi OS Lite 32-bit (Trixie) |
 | Pi 4 | Raspberry Pi OS Lite 64-bit (Trixie) |
