@@ -25,8 +25,8 @@ done
 echo "installing dependencies..."
 sudo apt-get install -y \
     pkgconf \
-    libavformat-dev libavcodec-dev libavutil-dev libswresample-dev libswscale-dev \
-    libdrm-dev libasound2-dev
+    libavformat-dev libavcodec-dev libavutil-dev llibfreetype6-devibswresample-dev libswscale-dev \
+    libdrm-dev libasound2-dev libcjson-dev libfreetype6-dev
 
 # Clone and build
 echo "cloning zeroplay..."
