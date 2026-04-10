@@ -433,8 +433,18 @@ void audio_run(AudioContext *ctx)
             pthread_cond_wait(&ctx->pause_cond, &ctx->pause_mutex);
         pthread_mutex_unlock(&ctx->pause_mutex);
 
-        /* Pull next packet from queue */
         void *item = NULL;
+
+        /* If queue is closed free all items */
+        if (ctx->audio_queue->closed) {
+            while (!queue_pop(ctx->audio_queue, &item)) {
+                AVPacket *pkt = (AVPacket *)item;
+                av_packet_free(&pkt);
+            }
+            break;
+        }
+
+        /* Pull next packet from queue */
         if (!queue_pop(ctx->audio_queue, &item))
             break;       /* queue closed — EOS */
 

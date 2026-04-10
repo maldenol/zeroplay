@@ -485,6 +485,16 @@ void vdec_run(VdecContext *ctx)
                 if (!out_buf_free[i]) continue;
 
                 void *item = NULL;
+
+                /* If queue is closed free all items */
+                if (ctx->packet_queue->closed) {
+                    while (!queue_pop(ctx->packet_queue, &item)) {
+                        AVPacket *pkt = (AVPacket *)item;
+                        av_packet_free(&pkt);
+                    }
+                    break;
+                }
+
                 if (!queue_pop(ctx->packet_queue, &item)) {
                     eos = 1;
                     break;
