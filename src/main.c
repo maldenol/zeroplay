@@ -501,6 +501,17 @@ static int player_open_video(PlayerContext *p, const char *filename, const char 
                         &p->audio_queue) == 0)) {
             p->audio.volume = opt->vol / 100.0f;
             p->audio_active = 1;
+
+            if (p->separate_audio)
+            {
+                p->vdec.audio_pts = &p->audio.audio_pts;
+                p->vdec.video_time_base = 1.0 / 1000000LL;
+                p->vdec.audio_time_base = av_q2d(p->demux_audio.fmt_ctx->streams[p->demux_audio.audio_stream_idx]->time_base);
+
+                p->audio.video_pts = &p->current_pts;
+                p->audio.video_time_base = 1.0 / 1000000LL;
+                p->audio.audio_time_base = av_q2d(p->demux_audio.fmt_ctx->streams[p->demux_audio.audio_stream_idx]->time_base);
+            }
         }
     }
 
