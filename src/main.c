@@ -1061,7 +1061,10 @@ int main(int argc, char *argv[])
                     : demux_prev_chapter(&players[i].demux,
                                          players[i].current_pts, &target);
                 if (found == 0) {
-                    int was_paused = paused; paused = 0;
+                    int was_paused = paused;
+                    paused = 0;
+                    if (was_paused)
+                        audio_resume(&players[i].audio);
                     player_seek(&players[i], target);
                     players[i].current_pts = target;
                     if (was_paused) {
@@ -1081,7 +1084,11 @@ int main(int argc, char *argv[])
             else if (key == KEY_UP)    delta = +SEEK_LONG_US;
             else if (key == KEY_DOWN)  delta = -SEEK_LONG_US;
 
-            int was_paused = paused; paused = 0;
+            int was_paused = paused;
+            paused = 0;
+            if (was_paused)
+                for (int i = 0; i < opened; i++)
+                    audio_resume(&players[i].audio);
             for (int i = 0; i < opened; i++) {
                 if (players[i].image_mode || !players[i].pipeline_open) continue;
                 int64_t target = players[i].current_pts + delta;
