@@ -464,6 +464,8 @@ void audio_run(AudioContext *ctx)
                     first_iter = 0;
                     if (delta < VIDEO_AUDIO_DESYNC_THRESHOLD) break;
                 }
+
+                usleep(VIDEO_AUDIO_DESYNC_EPSILON * 1000000.0);
             } while (!ctx->audio_queue->closed && (delta > VIDEO_AUDIO_DESYNC_EPSILON));
 
             ctx->audio_pts = audio_pts;

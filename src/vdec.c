@@ -596,6 +596,8 @@ void vdec_run(VdecContext *ctx)
                             first_iter = 0;
                             if (delta < VIDEO_AUDIO_DESYNC_THRESHOLD) break;
                         }
+
+                        usleep(VIDEO_AUDIO_DESYNC_EPSILON * 1000000.0);
                     } while (!ctx->packet_queue->closed && (delta > VIDEO_AUDIO_DESYNC_EPSILON));
                 }
 
