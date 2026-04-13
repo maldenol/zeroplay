@@ -393,8 +393,10 @@ static void player_threads_stop(PlayerContext *p)
     if (p->audio_active && p->separate_audio)
         pthread_join(p->datid, NULL);
     pthread_join(p->vtid, NULL);
-    if (p->audio_active)
+    if (p->audio_active) {
+        audio_resume(&p->audio);
         pthread_join(p->atid, NULL);
+    }
     if (p->sub_active && p->sub_embedded)
         pthread_join(p->stid, NULL);
 }
