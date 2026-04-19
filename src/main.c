@@ -735,7 +735,7 @@ static int run_ws_mode(Options *opt)
         .backend_ws_url    = opt->ws_url,
         .device_token      = opt->device_token,
         .health_port       = opt->health_port,
-        .state_interval_ms = 5000,
+        .state_interval_ms = 1000,
         .ping_interval_ms  = 20000,
     };
 
